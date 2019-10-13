@@ -15,7 +15,7 @@ function buildMetadata(sample) {
 	Object.entries(data).forEach(([key, value])=>{
 		selector.append("h6").text(`${key}:${value}`);
 	})
-	 buildGauge(data.WFREQ);
+//	 buildGauge(data.WFREQ);
    })
  
  }
@@ -37,11 +37,7 @@ function buildCharts(sample){
 	   const otu_labels = data.otu_labels;
 	   const sample_values = data.sample_values;
     // @TODO: Build a Bubble Chart using the sample data
-	var bubblelayout = {
-      margin: { t: 0 },
-      hovermode: "closests",
-      xaxis: { title: "OTU ID"}
-    }
+
       
     // @TODO: Build a Pie Chart
 	var bubbleData = [{
@@ -54,13 +50,17 @@ function buildCharts(sample){
         color: otu_ids,
         colorscale: "Rainbow"
       }
-    }]
+    }];
 
     // bubble layout
 
-    
+    	var layout = {
+      margin: { t: 0 },
+      hovermode: "closest",
+      xaxis: { title: "OTU ID"}
+    };
 
-    Plotly.newPlot("bubble", bubbleData, bublelayout)
+    Plotly.plot("bubble", bubbleData, layout)
 
     // @TODO: Build a Pie Chart
     // HINT: You will need to use slice() to grab the top 10 sample_values,
@@ -80,7 +80,7 @@ function buildCharts(sample){
       margin: {t: 0, 1:0}
     };
 
-    Plotly.newPlot("pie", pieData, layoutPie)
+    Plotly.plot("pie", pieData, layoutPie)
 
    })
 }  
